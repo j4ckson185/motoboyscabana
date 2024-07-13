@@ -19,6 +19,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/orders", handlers.GetOrders(db)).Methods("GET")
+	r.HandleFunc("/orders", handlers.CreateOrder(db)).Methods("POST")
 
 	http.Handle("/", r)
 	log.Println("Starting server on :4001")

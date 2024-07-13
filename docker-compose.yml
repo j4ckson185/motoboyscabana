@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  auth-api:
+    build: ./backend/auth-api
+    ports:
+      - "4000:4000"
+    environment:
+      - DB_CONN_STRING=postgres://postgres:saberviagens@postgres:5432/auth_db?sslmode=disable
+
+  orders-api:
+    build: ./backend/orders-api
+    ports:
+      - "4001:4001"
+    environment:
+      - DB_CONN_STRING=postgres://postgres:saberviagens@postgres:5432/orders_db?sslmode=disable
+
+  delivery-api:
+    build: ./backend/delivery-api
+    ports:
+      - "4002:4002"
+    environment:
+      - DB_CONN_STRING=postgres://postgres:saberviagens@postgres:5432/delivery_db?sslmode=disable
+
+  appcomida-api:
+    build: ./backend/appcomida-api
+    ports:
+      - "4003:4003"
+    environment:
+      - DB_CONN_STRING=postgres://postgres:saberviagens@postgres:5432/appcomida_db?sslmode=disable
+
+  appentrega-api:
+    build: ./backend/appentrega-api
+    ports:
+      - "4004:4004"
+    environment:
+      - DB_CONN_STRING=postgres://postgres:saberviagens@postgres:5432/appentrega_db?sslmode=disable
+
+  webrestaurante-api:
+    build: ./backend/webrestaurante-api
+    ports:
+      - "4005:4005"
+    environment:
+      - DB_CONN_STRING=postgres://postgres:saberviagens@postgres:5432/webrestaurante_db?sslmode=disable
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: saberviagens
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
